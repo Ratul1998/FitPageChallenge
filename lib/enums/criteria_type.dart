@@ -1,5 +1,6 @@
+import 'package:fir_page_challenge/constants/routes.dart';
 import 'package:fir_page_challenge/models/data_model.dart';
-import 'package:fir_page_challenge/screens/variable_page.dart';
+import 'package:fir_page_challenge/utils/helper_functions.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -40,11 +41,11 @@ extension CriteriaTypeMapping on CriterionType {
                         recognizer: criterion.variableMap!.containsKey(e)
                             ? (TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => VariablePage(
-                                        title: e,
-                                        variableData:
-                                            criterion.variableMap![e]!)));
+                                Navigator.of(context)
+                                    .pushNamed(Routes.variablePage, arguments: {
+                                  'variableData': criterion.variableMap![e]!,
+                                  'title': e
+                                });
                               })
                             : null,
                         style: TextStyle(
@@ -56,29 +57,4 @@ extension CriteriaTypeMapping on CriterionType {
         );
     }
   }
-}
-
-List<String> splitString(String input, List<String> splitSubstrings) {
-  String joinedPattern = splitSubstrings.map((substring) {
-    return RegExp.escape(substring);
-  }).join('|');
-
-  RegExp pattern = RegExp(joinedPattern);
-
-  List<String> substrings = input.split(pattern);
-
-  List<String> result = [];
-
-  int j = 0;
-
-  for (int i = 0; i < substrings.length; i++) {
-    result.add(substrings[i]);
-
-    if (i < substrings.length - 1 && j < splitSubstrings.length) {
-      result.add(splitSubstrings[j]);
-      j++;
-    }
-  }
-
-  return result;
 }

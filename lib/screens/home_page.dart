@@ -1,9 +1,8 @@
+import 'package:fir_page_challenge/constants/routes.dart';
 import 'package:fir_page_challenge/extensions/string_extensions.dart';
 import 'package:fir_page_challenge/models/data_model.dart';
 import 'package:fir_page_challenge/service/data_service.dart';
 import 'package:flutter/material.dart';
-
-import 'criteria_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -42,11 +41,11 @@ class _MyHomePageState extends State<MyHomePage> with DataService {
               children: stocks
                   .map((e) => InkWell(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => CriteriaPage(
-                                    criterion: e.criteria,
-                                    title: e.name,
-                                  )));
+                          Navigator.of(context).pushNamed(Routes.criteriaPage,
+                              arguments: {
+                                'criterion': e.criteria,
+                                'title': e.name
+                              });
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(16),

@@ -1,4 +1,5 @@
-import 'package:fir_page_challenge/screens/home_page.dart';
+import 'package:fir_page_challenge/constants/routes.dart';
+import 'package:fir_page_challenge/utils/navigation_helper.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,12 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Fit Page Challenge',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      onGenerateRoute: onGenerateRoute,
+      initialRoute: Routes.homePage,
     );
   }
 }
